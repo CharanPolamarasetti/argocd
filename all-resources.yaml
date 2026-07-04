@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: moviedeploy-1
+  name: moviedeploy
   namespace: prod
 
 spec:
@@ -23,10 +23,10 @@ spec:
     spec:
       containers:
       - name: moviecontainer
-        image: charanpolamarasetti/webappimg:1.0
+        image: charanpolamarasetti/peddi:1.0
 
         ports:
-        - containerPort: 8080
+        - containerPort: 80
 
         envFrom:
         - configMapRef:
@@ -50,7 +50,7 @@ spec:
 
   ports:
   - port: 1101
-    targetPort: 8080
+    targetPort: 80
     nodePort: 31999
 
 ---
