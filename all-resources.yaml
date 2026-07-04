@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: moviecontainer
-        image: charanpolamarasetti/jarimage:1.0
+        image: charanpolamarasetti/webappimg:1.0
 
         ports:
         - containerPort: 8080
