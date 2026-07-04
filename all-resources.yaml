@@ -23,10 +23,10 @@ spec:
     spec:
       containers:
       - name: moviecontainer
-        image: charanpolamarasetti/peddi:1.0
+        image: charanpolamarasetti/jarimage:1.0
 
         ports:
-        - containerPort: 80
+        - containerPort: 8080
 
         envFrom:
         - configMapRef:
@@ -50,7 +50,7 @@ spec:
 
   ports:
   - port: 1101
-    targetPort: 80
+    targetPort: 8080
     nodePort: 31999
 
 ---
