@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moviedeploy
+  namespace: prod
+
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: movie
+      env: prod
+      owner: charan
+
+  template:
+    metadata:
+      labels:
+        app: movie
+        env: prod
+        owner: charan
+
+    spec:
+      containers:
+      - name: moviecontainer
+        image: charanpolamarasetti/peddi:1.0
+
+        ports:
+        - containerPort: 80
+
+        envFrom:
+        - configMapRef:
+            name: movieconfig
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: moviesvc
+  namespace: prod
+
+spec:
+  type: LoadBalancer
+
+  selector:
+    app: movie
+    env: prod
+    owner: charan
+
+  ports:
+  - port: 1101
+    targetPort: 80
+    nodePort: 31999
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: movieconfig
+  namespace: prod
+
+data:
+  MOVIE_NAME: peddi
+  HERO_NAME: ramcharan
+  PRODUCTION_NUMBER: "123"
